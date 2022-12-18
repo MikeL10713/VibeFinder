@@ -9,8 +9,6 @@ const RecommendedTracks = () => {
       <li>(song name, album name and picture, playback sample)</li>
       <li>(song name, album name and picture, playback sample)</li>
       <li>(song name, album name and picture, playback sample)</li>
-      <li>(song name, album name and picture, playback sample)</li>
-      <li>(song name, album name and picture, playback sample)</li>
     </div>
   )
 }

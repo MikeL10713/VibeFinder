@@ -9,7 +9,7 @@ const App = () => {
   const [data, setData] = useState([{}])
 
   useEffect(() => {
-    fetch("/test").then(
+    fetch("/data").then(
       res => res.json()
     ).then(
       data => {

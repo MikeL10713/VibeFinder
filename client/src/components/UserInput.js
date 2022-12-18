@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Artistinput = () => {
   const [artist, setArtist] = useState("")
   const [track, setTrack] = useState("")
+  const [trackArtist, setTrackArtist] = useState("")
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -12,12 +13,17 @@ const Artistinput = () => {
       return
     }
     if (!track) {
-      alert("Please choose an track")
+      alert("Please choose a track")
+      return
+    }
+    if (!trackArtist) {
+      alert("Please specify the track's artist")
       return
     }
 
     setArtist("")
     setTrack("")
+    setTrackArtist("")
   }
 
   return (
@@ -27,13 +33,22 @@ const Artistinput = () => {
           type="text"
           placeholder="Artist that you want tracks from"
           value={artist}
+          name="artist"
           onChange={(e) => setArtist(e.target.value)} 
         />
         <input style={{marginLeft: 10, width: 300}}
           type="text"
           placeholder="Track with the vibes you're looking for"
           value={track}
+          name="track"
           onChange={(e) => setTrack(e.target.value)} 
+        />
+        <input style={{marginLeft: 10, width: 300}}
+          type="text"
+          placeholder="Artist that made your track"
+          value={trackArtist}
+          name="trackArtist"
+          onChange={(e) => setTrackArtist(e.target.value)} 
         />
         <input style={{marginLeft: 10, width: 200}}
           type="submit"
