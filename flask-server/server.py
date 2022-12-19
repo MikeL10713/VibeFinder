@@ -1,10 +1,11 @@
 from flask import Flask, request
+from recommendations import data_for_front_end
 
 app = Flask(__name__)
 
 @app.route("/data")
 def get_data():
-  return {"members": ["test1", "test2", "test3"]}
+  return data_for_front_end
 
 @app.route('/search', methods = ['POST', 'GET'])
 def search():
