@@ -6,9 +6,9 @@ const RecommendedTracks = () => {
         flexDirection: "row",
         marginLeft: 10
     }}>
-      <li>(song name, album name and picture, playback sample)</li>
-      <li>(song name, album name and picture, playback sample)</li>
-      <li>(song name, album name and picture, playback sample)</li>
+      <li>(name, album, artist, album cover, and link to playback sample)</li>
+      <li>(name, album, artist, album cover, and link to playback sample)</li>
+      <li>(name, album, artist, album cover, and link to playback sample)</li>
     </div>
   )
 }

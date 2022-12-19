@@ -15,23 +15,24 @@ headers = {
 }
 
 # these will be taken from user input
-target_track_name = "message in a bottle"
-target_track_artist = "taylor swift"
-new_artist = "twice"
+target_track_name_search_query = "cornelia street"
+target_track_artist_search_query = "taylor swift"
+new_artist_search_query = "taylor swift"
 recommendation_count = 3
 
 # searching for target track given name and artist by user
-querystring = {"q": target_track_name + " artist:" + target_track_artist,"type":"track"}
+querystring = {"q": target_track_name_search_query + " artist:" + target_track_artist_search_query,"type":"track"}
 response = requests.get("https://api.spotify.com/v1/search",headers=headers,params=querystring)
 target_track = response.json().get("tracks").get("items")[0]
 
 # searching for all of the albums by new artist
-querystring = {"q":new_artist,"type":"artist"}
+querystring = {"q":new_artist_search_query,"type":"artist"}
 response = requests.get("https://api.spotify.com/v1/search",headers=headers,params=querystring)
-artist_id = response.json().get("artists").get("items")[0].get("id")
+new_artist_id = response.json().get("artists").get("items")[0].get("id")
 new_artist_name = response.json().get("artists").get("items")[0].get("name")
+new_artist_image_url = response.json().get("artists").get("items")[0].get("images")[0].get("url")
 querystring = {"limit":50}
-response = requests.get("https://api.spotify.com/v1/artists/" + artist_id + "/albums",headers=headers,params=querystring)
+response = requests.get("https://api.spotify.com/v1/artists/" + new_artist_id + "/albums",headers=headers,params=querystring)
 albums = response.json().get("items")
 
 # spotify can have multiple albums with the same name so we only take unique names to prevent execessive data
@@ -145,4 +146,46 @@ while all_track_ids:
         recommended_track_ids[track.get("id")] = euclidean_distance
     all_track_ids = []
 
-print(recommended_track_ids)
+# front end needs:
+  # new artist's name and picture
+
+print(new_artist_name)
+print(new_artist_image_url)
+
+  # target track's name, album, artist, and album cover
+target_track_name = target_track.get("name")
+target_track_album = target_track.get("album").get("name")
+target_track_artists = ""
+for ar in target_track.get("artists"):
+  target_track_artists += ar.get("name") + ", "
+target_track_artists = target_track_artists[:len(target_track_artists) - 2]
+target_track_album_cover_url = target_track.get("album").get("images")[0].get("url")
+
+print(target_track_name)
+print(target_track_album)
+print(target_track_artists)
+print(target_track_album_cover_url)
+
+  # name, album, artist, album cover, and link to playback sample for each recommended track
+recommended_track_names = []
+recommended_track_albums = []
+recommended_track_artists = []
+recommended_track_album_cover_urls = []
+ids = ",".join(recommended_track_ids)
+querystring = {"ids":ids}
+response = requests.get("https://api.spotify.com/v1/tracks",headers=headers,params=querystring)
+recommended_tracks = response.json().get("tracks")
+for tr in recommended_tracks:
+  recommended_track_names.append(tr.get("name"))
+  recommended_track_albums.append(tr.get("album").get("name"))
+  rtas = ""
+  for ar in tr.get("artists"):
+    rtas += ar.get("name") + ", "
+  recommended_track_artists.append(rtas[:len(rtas) - 2])
+  recommended_track_album_cover_urls.append(tr.get("album").get("images")[0].get("url"))
+
+print(recommended_track_names)
+print(recommended_track_albums)
+print(recommended_track_artists)
+print(recommended_track_album_cover_urls)
+

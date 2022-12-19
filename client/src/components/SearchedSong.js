@@ -1,7 +1,7 @@
 const SearchedSong = () => {
   return (
     <div style={{marginLeft: 135}}>
-      (track's name and album picture)
+      (track's name, artist, album name, and album picture)
     </div>
   )
 }
