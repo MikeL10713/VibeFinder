@@ -17,7 +17,7 @@ headers = {
 # these will be taken from user input
 target_track_name = "message in a bottle"
 target_track_artist = "taylor swift"
-new_artist = "lauv"
+new_artist = "twice"
 recommendation_count = 3
 
 # searching for target track given name and artist by user
@@ -52,14 +52,38 @@ for al in albums:
 # for every album, we get every track in it while still watching out for repeats
 unique_track_names = set()
 all_tracks = []
-for id in album_ids:
-  querystring = {"limit":50}
-  response = requests.get("https://api.spotify.com/v1/albums/" + id + "/tracks",headers=headers,params=querystring)
-  tracks = response.json().get("items")
-  for tr in tracks:
-    if (tr.get("name") not in unique_track_names):
-      all_tracks.append(tr)
-    unique_track_names.add(tr.get("name"))
+while album_ids:
+  # we have to process the albums in batches of 20 (api limit for getting multiple albums)
+  if len(album_ids) > 20:
+    ids = ",".join(album_ids[:20])
+    querystring = {"ids":ids}
+    response = requests.get("https://api.spotify.com/v1/albums",headers=headers,params=querystring)
+    albums = response.json()
+    for album in albums.get("albums"):
+      id = album.get("id")
+      querystring = {"limit":50}
+      response = requests.get("https://api.spotify.com/v1/albums/" + id + "/tracks",headers=headers,params=querystring)
+      tracks = response.json().get("items")
+      for tr in tracks:
+        if (tr.get("name") not in unique_track_names):
+          all_tracks.append(tr)
+        unique_track_names.add(tr.get("name"))
+    album_ids = album_ids[20:]
+  else:        
+    ids = ",".join(album_ids)
+    querystring = {"ids":ids}
+    response = requests.get("https://api.spotify.com/v1/albums",headers=headers,params=querystring)
+    albums = response.json()
+    for album in albums.get("albums"):
+      id = album.get("id")
+      querystring = {"limit":50}
+      response = requests.get("https://api.spotify.com/v1/albums/" + id + "/tracks",headers=headers,params=querystring)
+      tracks = response.json().get("items")
+      for tr in tracks:
+        if (tr.get("name") not in unique_track_names):
+          all_tracks.append(tr)
+        unique_track_names.add(tr.get("name"))
+    album_ids = []
 
 # getting the audio features of the target track
 response = requests.get("https://api.spotify.com/v1/audio-features/" + target_track.get("id"),headers=headers)
