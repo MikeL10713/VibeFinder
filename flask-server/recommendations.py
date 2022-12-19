@@ -15,9 +15,9 @@ headers = {
 }
 
 # these will be taken from user input
-target_track_name_search_query = "cornelia street"
-target_track_artist_search_query = "taylor swift"
-new_artist_search_query = "taylor swift"
+target_track_name_search_query = "you"
+target_track_artist_search_query = "regard"
+new_artist_search_query = "twice"
 recommendation_count = 3
 
 # searching for target track given name and artist by user
@@ -148,9 +148,7 @@ while all_track_ids:
 
 # front end needs:
   # new artist's name and picture
-
-print(new_artist_name)
-print(new_artist_image_url)
+    # obtained before when searching for new artist
 
   # target track's name, album, artist, and album cover
 target_track_name = target_track.get("name")
@@ -160,11 +158,6 @@ for ar in target_track.get("artists"):
   target_track_artists += ar.get("name") + ", "
 target_track_artists = target_track_artists[:len(target_track_artists) - 2]
 target_track_album_cover_url = target_track.get("album").get("images")[0].get("url")
-
-print(target_track_name)
-print(target_track_album)
-print(target_track_artists)
-print(target_track_album_cover_url)
 
   # name, album, artist, album cover, and link to playback sample for each recommended track
 recommended_track_names = []
@@ -184,8 +177,18 @@ for tr in recommended_tracks:
   recommended_track_artists.append(rtas[:len(rtas) - 2])
   recommended_track_album_cover_urls.append(tr.get("album").get("images")[0].get("url"))
 
-print(recommended_track_names)
-print(recommended_track_albums)
-print(recommended_track_artists)
-print(recommended_track_album_cover_urls)
+# for front end
+data_for_front_end = {
+  "new_artist_name": new_artist_name,
+  "new_artist_image_url": new_artist_image_url,
+  "target_track_name": target_track_name,
+  "target_track_album": target_track_album,
+  "target_track_artists": target_track_artists,
+  "target_track_album_cover_url": target_track_album_cover_url,
+  "recommended_track_names": recommended_track_names,
+  "recommended_track_albums": recommended_track_albums,
+  "recommended_track_artists": recommended_track_artists,
+  "recommended_track_album_cover_urls": recommended_track_album_cover_urls,
+}
 
+print(data_for_front_end)
