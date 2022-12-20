@@ -1,6 +1,5 @@
 import requests
 from clientCredentials import client_id, client_secret 
-import math
 
 # setup for making API calls
 data = {
@@ -15,10 +14,10 @@ headers = {
 }
 
 # these will be taken from user input
-target_track_name_search_query = "cruel summer"
+target_track_name_search_query = "state of grace"
 target_track_artist_search_query = "taylor swift"
 new_artist_search_query = "twice"
-recommendation_count = 3
+recommendation_count = int("3")
 
 # searching for target track given name and artist by user
 querystring = {"q": target_track_name_search_query + " artist:" + target_track_artist_search_query,"type":"track"}
@@ -91,7 +90,15 @@ response = requests.get("https://api.spotify.com/v1/audio-features/" + target_tr
 target_audio_features = response.json()
 target_danceability = target_audio_features.get("danceability")
 target_energy = target_audio_features.get("energy")
+target_instrumentalness = target_audio_features.get("instrumentalness")
+target_speechiness = target_audio_features.get("speechiness")
 target_valence = target_audio_features.get("valence")
+
+# euclidean distance function allows for modifying number of audio features and adding weights to certain features
+import math
+
+def find_euclidean_distance(danceA, energyA, instrA, speechA, valenA, danceB, energyB, instrB, speechB, valenB):
+  return math.sqrt(pow((danceA - danceB), 2) + pow((energyA - energyB), 2) + pow((instrA - instrB), 2) + pow((speechA - speechB), 2) + pow((valenA - valenB), 2))
 
 # selecting the three tracks with the least euclidean distance from the target track to be recommended
 # making a dict to map track ids to their euclidean distance with placeholder values
@@ -111,8 +118,10 @@ while all_track_ids:
     for track in response_audio_features:
       danceability = track.get("danceability")
       energy = track.get("energy")
+      instrumentalness = track.get("instrumentalness")
+      speechiness = track.get("speechiness")
       valence = track.get("valence")
-      euclidean_distance = math.sqrt(pow((target_danceability - danceability), 2) + pow((target_energy - energy), 2) + pow((target_valence - valence), 2))
+      euclidean_distance = find_euclidean_distance(target_danceability, target_energy, target_instrumentalness, target_speechiness, target_valence, danceability, energy, instrumentalness, speechiness, valence)
       # go through and replace the largest euclidean distance in the dict if the current one is smaller
       largest_euclidean_distance = 0
       corresponding_slot = 0
@@ -132,8 +141,10 @@ while all_track_ids:
     for track in response_audio_features:
       danceability = track.get("danceability")
       energy = track.get("energy")
+      instrumentalness = track.get("instrumentalness")
+      speechiness = track.get("speechiness")
       valence = track.get("valence")
-      euclidean_distance = math.sqrt(pow((target_danceability - danceability), 2) + pow((target_energy - energy), 2) + pow((target_valence - valence), 2))
+      euclidean_distance = find_euclidean_distance(target_danceability, target_energy, target_instrumentalness, target_speechiness, target_valence, danceability, energy, instrumentalness, speechiness, valence)
       # go through and replace the largest euclidean distance in the dict if the current one is smaller
       largest_euclidean_distance = 0
       corresponding_slot = 0
@@ -189,5 +200,3 @@ data_for_front_end = {
   "recommended_track_artists": recommended_track_artists,
   "recommended_track_album_cover_urls": recommended_track_album_cover_urls,
 }
-
-print(data_for_front_end)
