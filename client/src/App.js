@@ -9,7 +9,7 @@ const App = () => {
   const [data, setData] = useState([{}])
 
   useEffect(() => {
-    fetch("/data").then(
+    fetch("/test").then(
       res => res.json()
     ).then(
       data => {
@@ -21,21 +21,28 @@ const App = () => {
 
   return (
     <div>
-      {(typeof data.members === "undefined") ? (
-        <p>Loading...</p>
-      ) : (
-        data.members.map((member, i) => (<p key={i}>{member}</p>))
-      )}
-
       <h1 style={{marginLeft: 10}}>VibeFinder</h1>
       <UserInput />
       <br/>
       <div style={{display: "flex"}}>
-        <SearchedArtist />
-        <SearchedSong />
+        <SearchedArtist 
+          artistName={data.new_artist_name} 
+          artistImageUrl={data.new_artist_image_url}
+        />
+        <SearchedSong 
+          trackName={data.target_track_name}
+          trackAlbum={data.target_track_album}
+          trackArtists={data.target_track_artists}
+          trackAlbumCoverUrl={data.target_track_album_cover_url}
+        />
       </div>
       <br/>
-      <RecommendedTracks />
+      <RecommendedTracks 
+        trackNames={data.recommended_track_names}
+        trackAlbums={data.recommended_track_albums}
+        trackArtists={data.recommended_track_artists}
+        trackAlbumCoverUrls={data.recommended_track_album_cover_urls}
+      />
     </div>
   )
 }

@@ -15,8 +15,8 @@ headers = {
 }
 
 # these will be taken from user input
-target_track_name_search_query = "you"
-target_track_artist_search_query = "regard"
+target_track_name_search_query = "cruel summer"
+target_track_artist_search_query = "taylor swift"
 new_artist_search_query = "twice"
 recommendation_count = 3
 
@@ -149,7 +149,6 @@ while all_track_ids:
 # front end needs:
   # new artist's name and picture
     # obtained before when searching for new artist
-
   # target track's name, album, artist, and album cover
 target_track_name = target_track.get("name")
 target_track_album = target_track.get("album").get("name")
@@ -177,7 +176,7 @@ for tr in recommended_tracks:
   recommended_track_artists.append(rtas[:len(rtas) - 2])
   recommended_track_album_cover_urls.append(tr.get("album").get("images")[0].get("url"))
 
-# for front end
+# json format for front end
 data_for_front_end = {
   "new_artist_name": new_artist_name,
   "new_artist_image_url": new_artist_image_url,

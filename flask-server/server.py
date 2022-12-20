@@ -3,7 +3,7 @@ from recommendations import data_for_front_end
 
 app = Flask(__name__)
 
-@app.route("/data")
+@app.route("/test")
 def get_data():
   return data_for_front_end
 
