@@ -20,18 +20,38 @@ const RecommendedTracks = ({ trackNames, trackAlbums, trackArtists, trackAlbumCo
         trackAlbum={albums[0]}
         trackArtists={artistLists[0]}
       />
+      {names.length > 1 &&
       <TrackDisplay 
         trackName={names[1]} 
         trackAlbumCoverUrl={urls[1]} 
         trackAlbum={albums[1]}
         trackArtists={artistLists[1]}
       />
+      }
+      {names.length > 2 &&
       <TrackDisplay 
         trackName={names[2]} 
         trackAlbumCoverUrl={urls[2]} 
         trackAlbum={albums[2]}
         trackArtists={artistLists[2]}
       />
+      }
+      {names.length > 3 &&
+      <TrackDisplay 
+        trackName={names[3]} 
+        trackAlbumCoverUrl={urls[3]} 
+        trackAlbum={albums[3]}
+        trackArtists={artistLists[3]}
+      />
+      }
+      {names.length > 4 &&
+      <TrackDisplay 
+        trackName={names[4]} 
+        trackAlbumCoverUrl={urls[4]} 
+        trackAlbum={albums[4]}
+        trackArtists={artistLists[4]}
+      />
+      }
     </div>
   )
 }
