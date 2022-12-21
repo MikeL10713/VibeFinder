@@ -1,19 +1,28 @@
 from flask import Flask, request
-from recommendations import data_for_front_end
+import json
+from recommendations import get_recommendations
 
 app = Flask(__name__)
 
-@app.route("/test")
+@app.route("/initial")
 def get_data():
-  return data_for_front_end
+  return {
+    "new_artist_name": "",
+    "new_artist_image_url": "",
+    "target_track_name": "",
+    "target_track_album": "",
+    "target_track_artists": "",
+    "target_track_album_cover_url": "",
+    "recommended_track_names": [],
+    "recommended_track_albums": [],
+    "recommended_track_artists": [],
+    "recommended_track_album_cover_urls": [],
+  }
 
-@app.route('/search', methods = ['POST', 'GET'])
+@app.route("/search", methods = ["POST", "GET"])
 def search():
-    if request.method == 'GET':
-        return f"The URL /search is accessed directly. Try going to '/form' to submit form"
-    if request.method == 'POST':
-        form_data = request.form
-        return {"test": ["test1", "test2", "test3"]}
+    user_input = json.loads(request.data)
+    return get_recommendations(user_input.get("tr"), user_input.get("ta"), user_input.get("ar"), int(user_input.get("tc")))
 
 if __name__ == "__main__":
   app.run(debug=True)
