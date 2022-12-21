@@ -4,6 +4,7 @@ from recommendations import get_recommendations
 
 app = Flask(__name__)
 
+# initial page is passed no search results so nothing is displayed other than search bar
 @app.route("/initial")
 def get_data():
   return {
@@ -19,6 +20,7 @@ def get_data():
     "recommended_track_album_cover_urls": [],
   }
 
+# when search is conducted, we call the method from recommendations.py with the user input as parameters
 @app.route("/search", methods = ["POST", "GET"])
 def search():
     user_input = json.loads(request.data)
