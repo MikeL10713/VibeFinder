@@ -2,12 +2,14 @@ const TrackDisplay = ({ trackName, trackAlbumCoverUrl, trackAlbum, trackArtists,
 
   const handleMouseEnter = () => {
     const audio = document.getElementsByClassName(audioPlaybackId)[0]
+    audio.volume *= 0.1
     audio.play()
   }
 
   const handleMouseLeave = () => {
     const audio = document.getElementsByClassName(audioPlaybackId)[0]
     audio.pause()
+    audio.volume *= 10
   }
 
   return (
