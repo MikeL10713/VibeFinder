@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import SearchedArtist from "./components/SearchedArtist";
-import SearchedSong from "./components/SearchedSong";
 import RecommendedTracks from "./components/RecommendedTracks";
 import UserInput from './components/UserInput';
+import UserSearched from './components/UserSearched';
 
 const App = () => {
 
@@ -28,20 +27,17 @@ const App = () => {
       <UserInput passData={setData}/>
       <br/>
       {names.length > 0 &&
-      <div style={{display: "flex"}}>
-        <SearchedArtist 
-          artistName={data.new_artist_name} 
-          artistImageUrl={data.new_artist_image_url}
-        />
-        <SearchedSong 
-          trackName={data.target_track_name}
-          trackAlbum={data.target_track_album}
-          trackArtists={data.target_track_artists}
-          trackAlbumCoverUrl={data.target_track_album_cover_url}
-          trackAudioUrl={data.target_track_audio_preview_url}
-          audioPlaybackId={data.target_track_name}
-        />
-      </div>
+      <UserSearched
+        artistName={data.new_artist_name} 
+        artistImageUrl={data.new_artist_image_url}
+        trackCount={data.recommended_track_names.length}
+        trackName={data.target_track_name}
+        trackAlbum={data.target_track_album}
+        trackArtists={data.target_track_artists}
+        trackAlbumCoverUrl={data.target_track_album_cover_url}
+        trackAudioUrl={data.target_track_audio_preview_url}
+        audioPlaybackId={data.target_track_name}
+      />
       }
       <br/>
       {names.length > 0 &&

@@ -17,7 +17,7 @@ const RecommendedTracks = ({ trackNames, trackAlbums, trackArtists, trackAlbumCo
   
   return (
     <div style={{marginLeft: 10}}>
-      <h1>And here they are:</h1>
+      <h1>Here {names.length > 1 ? "they are" : "it is"}:</h1>
       <TrackDisplay 
         trackName={names[0]} 
         trackAlbumCoverUrl={albumUrls[0]} 
