@@ -156,7 +156,7 @@ def get_recommendations(target_track_name_search_query, target_track_artist_sear
   # front end needs:
     # new artist's name and picture
       # obtained before when searching for new artist
-    # target track's name, album, artist, and album cover
+    # target track's name, album, artist, album cover, and link to playback sample
   target_track_name = target_track.get("name")
   target_track_album = target_track.get("album").get("name")
   target_track_artists = ""
@@ -164,12 +164,14 @@ def get_recommendations(target_track_name_search_query, target_track_artist_sear
     target_track_artists += ar.get("name") + ", "
   target_track_artists = target_track_artists[:len(target_track_artists) - 2]
   target_track_album_cover_url = target_track.get("album").get("images")[0].get("url")
+  target_track_audio_preview_url = target_track.get("preview_url")
 
     # name, album, artist, album cover, and link to playback sample for each recommended track
   recommended_track_names = []
   recommended_track_albums = []
   recommended_track_artists = []
   recommended_track_album_cover_urls = []
+  recommended_track_audio_preview_urls = []
   ids = ",".join(recommended_track_ids)
   querystring = {"ids":ids}
   response = requests.get("https://api.spotify.com/v1/tracks",headers=headers,params=querystring)
@@ -182,6 +184,7 @@ def get_recommendations(target_track_name_search_query, target_track_artist_sear
       rtas += ar.get("name") + ", "
     recommended_track_artists.append(rtas[:len(rtas) - 2])
     recommended_track_album_cover_urls.append(tr.get("album").get("images")[0].get("url"))
+    recommended_track_audio_preview_urls.append(tr.get("preview_url"))
 
   # json format for front end
   data_for_front_end = {
@@ -191,10 +194,12 @@ def get_recommendations(target_track_name_search_query, target_track_artist_sear
     "target_track_album": target_track_album,
     "target_track_artists": target_track_artists,
     "target_track_album_cover_url": target_track_album_cover_url,
+    "target_track_audio_preview_url": target_track_audio_preview_url,
     "recommended_track_names": recommended_track_names,
     "recommended_track_albums": recommended_track_albums,
     "recommended_track_artists": recommended_track_artists,
     "recommended_track_album_cover_urls": recommended_track_album_cover_urls,
+    "recommended_track_audio_preview_urls": recommended_track_audio_preview_urls,
   }
 
   return data_for_front_end

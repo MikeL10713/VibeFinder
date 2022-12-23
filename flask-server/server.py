@@ -14,10 +14,12 @@ def get_data():
     "target_track_album": "",
     "target_track_artists": "",
     "target_track_album_cover_url": "",
+    "target_track_audio_preview_url": "",
     "recommended_track_names": [],
     "recommended_track_albums": [],
     "recommended_track_artists": [],
     "recommended_track_album_cover_urls": [],
+    "recommended_track_audio_preview_urls": [],
   }
 
 # when search is conducted, we call the method from recommendations.py with the user input as parameters

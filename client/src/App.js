@@ -38,6 +38,8 @@ const App = () => {
           trackAlbum={data.target_track_album}
           trackArtists={data.target_track_artists}
           trackAlbumCoverUrl={data.target_track_album_cover_url}
+          trackAudioUrl={data.target_track_audio_preview_url}
+          audioPlaybackId={data.target_track_name}
         />
       </div>
       }
@@ -48,6 +50,8 @@ const App = () => {
         trackAlbums={data.recommended_track_albums}
         trackArtists={data.recommended_track_artists}
         trackAlbumCoverUrls={data.recommended_track_album_cover_urls}
+        trackAudioUrls={data.recommended_track_audio_preview_urls}
+        audioPlaybackIds={data.recommended_track_names}
       />
       }
     </div>
