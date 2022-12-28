@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "../index.css"
 
 const UserInput = ({ passData }) => {
 
@@ -51,36 +52,36 @@ const UserInput = ({ passData }) => {
   }
 
   return (
-    <form onSubmit={onSubmit}> 
-      <input style={{marginLeft: 10, width: 200}}
+    <form onSubmit={onSubmit} className="searchbar" style={{marginLeft: -10}}> 
+      <input style={{width: 250}}
         type="text"
         placeholder="Artist that you want tracks from"
         value={artist}
         name="artist"
         onChange={(e) => setArtist(e.target.value)} 
       />
-      <input style={{marginLeft: 10, width: 230}}
+      <input style={{width: 270}}
         type="text"
         placeholder="How many tracks do you want? 1-5"
         value={trackCount}
         name="trackCount"
         onChange={(e) => setTrackCount(e.target.value)} 
       />
-      <input style={{marginLeft: 10, width: 240}}
+      <input style={{width: 300}}
         type="text"
         placeholder="Track with the vibes you're looking for"
         value={track}
         name="track"
         onChange={(e) => setTrack(e.target.value)} 
       />
-      <input style={{marginLeft: 10, width: 180}}
+      <input style={{width: 220}}
         type="text"
         placeholder="Artist that made your track"
         value={trackArtist}
         name="trackArtist"
         onChange={(e) => setTrackArtist(e.target.value)} 
       />
-      <input style={{marginLeft: 10, width: 175}}
+      <input style={{width: 145}}
         type="submit"
         value="Find some vibes!"
       />

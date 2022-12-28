@@ -25,9 +25,10 @@ const TrackDisplay = ({ trackName, trackAlbumCoverUrl, trackAlbum, trackArtists,
           height={250}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          style={{borderRadius: 5}}
         />
       </div>
-      <div>
+      <div style={{marginLeft: 10}}>
         <h1>{trackName}</h1>
         <h2>{trackAlbum}</h2>
         <h2>{trackArtists}</h2>

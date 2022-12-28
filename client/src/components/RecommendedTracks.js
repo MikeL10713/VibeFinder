@@ -16,7 +16,7 @@ const RecommendedTracks = ({ trackNames, trackAlbums, trackArtists, trackAlbumCo
   audioPlaybackIds?.map((url, i) => audioIds[i] = url)
   
   return (
-    <div style={{marginLeft: 10}}>
+    <div>
       <h1>Here {names.length > 1 ? "they are" : "it is"}:</h1>
       <TrackDisplay 
         trackName={names[0]} 
@@ -27,44 +27,44 @@ const RecommendedTracks = ({ trackNames, trackAlbums, trackArtists, trackAlbumCo
         audioPlaybackId={audioIds[0]}
       />
       {names.length > 1 &&
-      <TrackDisplay 
-        trackName={names[1]} 
-        trackAlbumCoverUrl={albumUrls[1]} 
-        trackAlbum={albums[1]}
-        trackArtists={artistLists[1]}
-        trackAudioUrl={audioUrls[1]}
-        audioPlaybackId={audioIds[1]}
-      />
+        <TrackDisplay 
+          trackName={names[1]} 
+          trackAlbumCoverUrl={albumUrls[1]} 
+          trackAlbum={albums[1]}
+          trackArtists={artistLists[1]}
+          trackAudioUrl={audioUrls[1]}
+          audioPlaybackId={audioIds[1]}
+        />
       }
       {names.length > 2 &&
-      <TrackDisplay 
-        trackName={names[2]} 
-        trackAlbumCoverUrl={albumUrls[2]} 
-        trackAlbum={albums[2]}
-        trackArtists={artistLists[2]}
-        trackAudioUrl={audioUrls[2]}
-        audioPlaybackId={audioIds[2]}
-      />
+        <TrackDisplay 
+          trackName={names[2]} 
+          trackAlbumCoverUrl={albumUrls[2]} 
+          trackAlbum={albums[2]}
+          trackArtists={artistLists[2]}
+          trackAudioUrl={audioUrls[2]}
+          audioPlaybackId={audioIds[2]}
+        />
       }
       {names.length > 3 &&
-      <TrackDisplay 
-        trackName={names[3]} 
-        trackAlbumCoverUrl={albumUrls[3]} 
-        trackAlbum={albums[3]}
-        trackArtists={artistLists[3]}
-        trackAudioUrl={audioUrls[3]}
-        audioPlaybackId={audioIds[3]}
-      />
+        <TrackDisplay 
+          trackName={names[3]} 
+          trackAlbumCoverUrl={albumUrls[3]} 
+          trackAlbum={albums[3]}
+          trackArtists={artistLists[3]}
+          trackAudioUrl={audioUrls[3]}
+          audioPlaybackId={audioIds[3]}
+        />
       }
       {names.length > 4 &&
-      <TrackDisplay 
-        trackName={names[4]} 
-        trackAlbumCoverUrl={albumUrls[4]} 
-        trackAlbum={albums[4]}
-        trackArtists={artistLists[4]}
-        trackAudioUrl={audioUrls[4]}
-        audioPlaybackId={audioIds[4]}
-      />
+        <TrackDisplay 
+          trackName={names[4]} 
+          trackAlbumCoverUrl={albumUrls[4]} 
+          trackAlbum={albums[4]}
+          trackArtists={artistLists[4]}
+          trackAudioUrl={audioUrls[4]}
+          audioPlaybackId={audioIds[4]}
+        />
       }
     </div>
   )
