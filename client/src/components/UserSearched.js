@@ -11,7 +11,7 @@ const UserSearched = ({ artistName, artistImageUrl, trackCount, trackName, track
           alt="" 
           width={250}
           height={250}
-          style={{borderRadius: 5}}
+          style={{borderRadius: 13}}
         />
         <div style={{marginLeft: 70}}>
         <TrackDisplay

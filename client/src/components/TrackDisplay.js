@@ -2,14 +2,14 @@ const TrackDisplay = ({ trackName, trackAlbumCoverUrl, trackAlbum, trackArtists,
 
   const handleMouseEnter = () => {
     const audio = document.getElementsByClassName(audioPlaybackId)[0]
-    audio.volume *= 0.1
+    audio.volume *= 0.25
     audio.play()
   }
 
   const handleMouseLeave = () => {
     const audio = document.getElementsByClassName(audioPlaybackId)[0]
     audio.pause()
-    audio.volume *= 10
+    audio.volume *= 4
   }
 
   return (
@@ -25,13 +25,14 @@ const TrackDisplay = ({ trackName, trackAlbumCoverUrl, trackAlbum, trackArtists,
           height={250}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          style={{borderRadius: 5}}
+          style={{borderRadius: 13}}
         />
       </div>
       <div style={{marginLeft: 10}}>
-        <h1>{trackName}</h1>
-        <h2>{trackAlbum}</h2>
-        <h2>{trackArtists}</h2>
+        <br/>
+        <h2 style={{fontSize: 30, textDecoration: "underline"}}>{trackName}</h2>
+        <h3 style={{fontSize: 25}}>{trackAlbum}</h3>
+        <h3 style={{fontSize: 25}}>{trackArtists}</h3>
       </div>
     </div>
   )
