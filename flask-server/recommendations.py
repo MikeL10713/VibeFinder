@@ -94,12 +94,12 @@ def get_recommendations(target_track_name_search_query, target_track_artist_sear
   import math
 
   def find_euclidean_distance(danceA, energyA, instrA, speechA, valenA, danceB, energyB, instrB, speechB, valenB):
-    return math.sqrt(pow((danceA - danceB), 2) + pow((energyA - energyB), 2) + pow((instrA - instrB), 2) + pow((speechA - speechB), 2) + pow((valenA - valenB), 2))
+    return math.sqrt(.6 * pow((danceA - danceB), 2) + 1 * pow((energyA - energyB), 2) + .5 * pow((instrA - instrB), 2) + .5 * pow((speechA - speechB), 2) + 1 * pow((valenA - valenB), 2))
 
   # selecting the three tracks with the least euclidean distance from the target track to be recommended
   # making a dict to map track ids to their euclidean distance with placeholder values
   recommended_track_ids = dict()
-  for i in range(0, recommendation_count): recommended_track_ids[i] = 13
+  for i in range(0, int(recommendation_count)): recommended_track_ids[i] = 13
   # getting all track ids to iterate through
   all_track_ids = []
   for tr in all_tracks:
@@ -152,7 +152,7 @@ def get_recommendations(target_track_name_search_query, target_track_artist_sear
           recommended_track_ids.pop(corresponding_slot)
           recommended_track_ids[track.get("id")] = euclidean_distance
       all_track_ids = []
-
+  
   # front end needs:
     # new artist's name and picture
       # obtained before when searching for new artist
