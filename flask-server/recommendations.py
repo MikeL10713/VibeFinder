@@ -99,7 +99,7 @@ def get_recommendations(target_track_name_search_query, target_track_artist_sear
   # selecting the three tracks with the least euclidean distance from the target track to be recommended
   # making a dict to map track ids to their euclidean distance with placeholder values
   recommended_track_ids = dict()
-  for i in range(0, int(recommendation_count)): recommended_track_ids[i] = 13
+  for i in range(0, int(recommendation_count) if int(recommendation_count) <= 5 else 5): recommended_track_ids[i] = 13
   # getting all track ids to iterate through
   all_track_ids = []
   for tr in all_tracks:
